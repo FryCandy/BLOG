@@ -42,30 +42,40 @@
 	System.out.println(rowPerPage+"<-rowPerPage");//게시글 수 디버깅
 	System.out.println(minPage+"<-minPage");//목록 첫페이지 표시 숫자 디버깅
 	
+	//title 검색기능 추가
+	String title = "";
+	if(request.getParameter("title")!=null){
+		title = request.getParameter("title");
+		System.out.println(title+"title");
+	}
+	
 	//dao 값 받기
 	BoardDao boardDao = new BoardDao();
 	//1. 카테고리 리스트 받기
 	ArrayList<HashMap<String,String>> categoryList = boardDao.categoryList();
-	//2.categoryName에 따른 게시판 리스트 받기
+	//2.categoryName에 따른 게시판 리스트 받기 //+title 검색기능 추가
 	int beginRow = (currentPage-1)*rowPerPage; //현재페이지가 변경되면 beginRow도 변경된다.
-	ArrayList<Board> boardList = boardDao.boardList(categoryName, beginRow, rowPerPage);
-	
+	ArrayList<Board> boardList = boardDao.boardList(categoryName,title, beginRow, rowPerPage);
 
 	
 	//데이터 가공
-	//1.카테고리 별 전체 행의 수
+	//1.카테고리 별 전체 행의 수 ----- 검색기능 추가로 totalRow 구하는 메서드 새로 생성
 	//전체 행의 수 = 그 카테고리 내의 cnt 수
 	//categoryName이 일치하는 행을 찾으면 그 categoryName에 따른 행의 수 출력
+	/* 
 	for( HashMap<String,String> m : categoryList){	
 		if(m.get("categoryName").equals(categoryName)){
 		System.out.println(m.get("categoryName")+"<-totalrow관련카테고리이름");//디버깅
 		totalRow = Integer.parseInt(m.get("categoryCount")); // totalRow에 카테고리 전체 행의 수 저장
 		}
 	}
+	*/
+	//BoardDao 에서 totalRow 값 호출
+	totalRow=boardDao.totalRow(categoryName, title);
 	//2.totalRow 결과 값으로 마지막 페이지 구하기
 	lastPage = ((totalRow - 1) / rowPerPage + 1); //마지막 페이지를 구하는 연산식
-	System.out.println(totalRow+"totalRow"); //총 게시물의 갯수 디버깅
-	System.out.println(lastPage+"<lastPage");//마지막 페이지 디버깅
+	System.out.println(totalRow+"<-totalRow"); //총 게시물의 갯수 디버깅
+	System.out.println(lastPage+"<-lastPage");//마지막 페이지 디버깅
 	
 %>
 <!DOCTYPE html>
@@ -155,14 +165,19 @@
 						%>
 					</tbody>
 				</table>
-				<!--board 입력과 현재페이지가 모두 나올수 있게 쪼개기  -->
+				<!--board 입력과 검색입력, 현재페이지가 모두 나올수 있게 쪼개기  -->
 				<div	class ="row">
-					<div class = "col-sm-6">
+					<div class = "col-sm-2">
 						<strong>현재 페이지 : <%=currentPage %></strong>
 					</div>
-					<div class = "col-sm-6">
-					<!-- 게시글 생성  -->
-					<p class="text-right"><a type = "button" class="btn btn-primary" href="<%=request.getContextPath()%>/board/insertBoardForm.jsp">board 입력</a></p>
+					<!-- title검색기능 -->
+					<div class = "col-sm-7">
+						<strong>title 검색:  </strong>
+						<input type="text" name="title" value="<%=title%>" size="50">
+					</div>
+					<div class = "col-sm-3">
+					<!-- 검색,게시글 생성 버튼  -->
+					<p class="text-right"><button type = "submit" class="btn btn-outline-info">검색</button><a type = "button" class="btn btn-primary" href="<%=request.getContextPath()%>/board/insertBoardForm.jsp">board 입력</a></p>
 					</div>
 				</div>
 				<!-- 페이지 목록 표시 부분 -->

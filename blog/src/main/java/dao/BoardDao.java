@@ -28,7 +28,7 @@ public class BoardDao {
 	conn = DriverManager.getConnection(dburl,dbuser,dbpw);
 	System.out.println(conn+"<--ListDB커넥션"); // db와 잘 연결 되었는지 디버깅
 	//쿼리 작성 및 입력	
-	String categoryListSql ="SELECT* FROM (SELECT  COALESCE (category_name,'전체') categoryName, count(*) cnt from board group by category_name WITH ROLLUP) c ORDER BY cnt DESC";
+	String categoryListSql ="SELECT* FROM (SELECT  COALESCE (category_name,'전체') categoryName, count(*) cnt from board  group by category_name WITH ROLLUP) c ORDER BY cnt DESC";
 	stmt = conn.prepareStatement(categoryListSql);
 	rs = stmt.executeQuery();
 	//데이터 베이스 로직 끝
@@ -48,7 +48,7 @@ public class BoardDao {
 	}
 	
 	//2.categoryName에 따른 게시판 리스트가 나오는 메서드
-	public ArrayList<Board> boardList(String categoryName, int beginRow, int rowPerPage) throws Exception {
+	public ArrayList<Board> boardList(String categoryName,String title, int beginRow, int rowPerPage) throws Exception {
 		ArrayList<Board> list = new ArrayList<Board>(); //boardList가 될 Arraylist 선언
 		//db와 연결
 		Class.forName("org.mariadb.jdbc.Driver");
@@ -63,8 +63,8 @@ public class BoardDao {
 		conn = DriverManager.getConnection(dburl,dbuser,dbpw);
 		System.out.println(conn+"<--ListDB커넥션"); // db와 잘 연결 되었는지 디버깅
 		//쿼리 작성
-		String categoryNameIn ="SELECT board_no boardNo, category_name categoryName, board_title boardTitle, create_date createDate FROM board WHERE category_name=? ORDER BY create_date DESC LIMIT ?, ?";
-		String categoryAll ="SELECT board_no boardNo, category_name categoryName, board_title boardTitle, create_date createDate FROM board ORDER BY create_date DESC LIMIT ?, ?";
+		String categoryAll ="SELECT board_no boardNo, category_name categoryName, board_title boardTitle, create_date createDate FROM board WHERE board_title like ? ORDER BY create_date DESC LIMIT ?, ?";
+		String categoryNameIn ="SELECT board_no boardNo, category_name categoryName, board_title boardTitle, create_date createDate FROM board WHERE category_name=? AND board_title like ? ORDER BY create_date DESC LIMIT ?, ?";
 		//categoryName = null 여부에 따른 쿼리 입력
 		/*페이지 바뀌면 끝이 아니고, 가지고 오는 데이터가 변경되어야 한다.
 			알고리즘 select ...... Limit0,10
@@ -72,13 +72,15 @@ public class BoardDao {
 		*/
 		if (categoryName.equals("전체") ){ // categoryName이 전체일경우 쿼리 입력
 			stmt=conn.prepareStatement(categoryAll);
-			stmt.setInt(1, beginRow);// 쿼리 안 ? = beginRow
-			stmt.setInt(2, rowPerPage);// 쿼리 안 ? = rowPerPage
+			stmt.setString(1, "%"+title+"%"); // where like ?
+			stmt.setInt(2, beginRow);// 쿼리 안 ? = beginRow
+			stmt.setInt(3, rowPerPage);// 쿼리 안 ? = rowPerPage
 		}else{//categoryName 이 전체가 아닐 경우의 쿼리 입력
 			stmt = conn.prepareStatement(categoryNameIn);
 			stmt.setString(1, categoryName);// 쿼리 안 ? = categoryName
-			stmt.setInt(2, beginRow);// 쿼리 안 ? = beginRow
-			stmt.setInt(3, rowPerPage);// 쿼리 안 ? = rowPerPage
+			stmt.setString(2, "%"+title+"%"); // where like ?
+			stmt.setInt(3, beginRow);// 쿼리 안 ? = beginRow
+			stmt.setInt(4, rowPerPage);// 쿼리 안 ? = rowPerPage
 			
 		}
 		//결과 가공
@@ -96,6 +98,44 @@ public class BoardDao {
 		stmt.close();
 		conn.close();
 		return list;
+	}
+	//2-1.검색기능 추가에 따른 totalRow을 구하는 메서드
+	public int totalRow(String categoryName,String title) throws Exception {
+		int totalRow = 0; //전체행의 수가 들어갈 변수 초기화
+		//db와 연결
+		Class.forName("org.mariadb.jdbc.Driver");
+		//데이터베이스 자원 준비
+		Connection conn = null;
+		PreparedStatement stmt = null;
+		ResultSet rs =null;
+		
+		String dburl = "jdbc:mariadb://localhost:3306/blog";
+		String dbuser ="root";
+		String dbpw = "java1234";
+		conn = DriverManager.getConnection(dburl,dbuser,dbpw);
+		System.out.println(conn+"<--ListDB커넥션"); // db와 잘 연결 되었는지 디버깅
+		//쿼리 작성
+		String categoryAll ="SELECT count(*) cnt FROM board WHERE board_title like ? ";
+		String categoryNameIn ="SELECT count(*) cnt FROM board WHERE category_name=? AND board_title like ? ";
+		//categoryName = null 여부에 따른 쿼리 입력
+		if (categoryName.equals("전체") ){ // categoryName이 전체일경우 쿼리 입력
+			stmt=conn.prepareStatement(categoryAll);
+			stmt.setString(1, "%"+title+"%"); // where like ?
+		}else{//categoryName 이 전체가 아닐 경우의 쿼리 입력
+			stmt = conn.prepareStatement(categoryNameIn);
+			stmt.setString(1, categoryName);// 쿼리 안 ? = categoryName
+			stmt.setString(2, "%"+title+"%"); // where like ?
+		}
+		//결과 가공
+		rs = stmt.executeQuery();
+		if(rs.next()) {
+			totalRow = rs.getInt("cnt");
+		}
+		//데이터베이스 자원 반납
+		rs.close();
+		stmt.close();
+		conn.close();
+		return totalRow;
 	}
 
 	//3. 게시판 작성 메서드 insertBoardAction.jsp에서 요청
