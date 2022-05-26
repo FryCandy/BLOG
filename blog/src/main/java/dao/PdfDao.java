@@ -20,7 +20,7 @@ public class PdfDao {
 		Class.forName("org.mariadb.jdbc.Driver");
 		String dburl = "jdbc:mariadb://localhost:3306/blog";
 		String dbuser ="root";
-		String dbpw = "java1234";
+		String dbpw = "mariadb1234";
 		conn = DriverManager.getConnection(dburl,dbuser,dbpw);
 		System.out.println(conn+"<--ListDB커넥션"); // db와 잘 연결 되었는지 디버깅
 		//쿼리 작성 및 입력
@@ -58,7 +58,7 @@ public class PdfDao {
 		Class.forName("org.mariadb.jdbc.Driver");
 		String dburl = "jdbc:mariadb://localhost:3306/blog";
 		String dbuser ="root";
-		String dbpw = "java1234";
+		String dbpw = "mariadb1234";
 		conn = DriverManager.getConnection(dburl,dbuser,dbpw);
 		System.out.println(conn+"<--totalrow커넥션"); // db와 잘 연결 되었는지 디버깅
 		//쿼리 작성 및 입력
@@ -88,7 +88,7 @@ public class PdfDao {
 		Class.forName("org.mariadb.jdbc.Driver");
 		String dburl = "jdbc:mariadb://localhost:3306/blog";
 		String dbuser ="root";
-		String dbpw = "java1234";
+		String dbpw = "mariadb1234";
 		conn = DriverManager.getConnection(dburl,dbuser,dbpw);
 		System.out.println(conn+"<--pdf입력DB커넥션"); // db와 잘 연결 되었는지 디버깅
 
@@ -119,7 +119,7 @@ public class PdfDao {
 		Class.forName("org.mariadb.jdbc.Driver");
 		String dburl = "jdbc:mariadb://localhost:3306/blog";
 		String dbuser ="root";
-		String dbpw = "java1234";
+		String dbpw = "mariadb1234";
 		conn = DriverManager.getConnection(dburl,dbuser,dbpw);
 		System.out.println(conn+"<--pdf상세보기DB커넥션"); // db와 잘 연결 되었는지 디버깅
 
@@ -154,7 +154,7 @@ public class PdfDao {
 		Class.forName("org.mariadb.jdbc.Driver");
 		String dburl = "jdbc:mariadb://localhost:3306/blog";
 		String dbuser ="root";
-		String dbpw = "java1234";
+		String dbpw = "mariadb1234";
 		conn = DriverManager.getConnection(dburl,dbuser,dbpw);
 		System.out.println(conn+"<--deletepdf"); // db와 잘 연결 되었는지 디버깅
 		//쿼리 작성 및 입력

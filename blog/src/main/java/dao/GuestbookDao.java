@@ -23,7 +23,7 @@ public class GuestbookDao {
 		
 		String dburl = "jdbc:mariadb://localhost:3306/blog";
 		String dbuser ="root";
-		String dbpw = "java1234";
+		String dbpw = "mariadb1234";
 		conn = DriverManager.getConnection(dburl,dbuser,dbpw);
 		System.out.println(conn+"<--전체 행의 수 반환 DB커넥션"); // db와 잘 연결 되었는지 디버깅
 		
@@ -53,7 +53,7 @@ public class GuestbookDao {
 	Class.forName("org.mariadb.jdbc.Driver");
 	String dburl = "jdbc:mariadb://localhost:3306/blog";
 	String dbuser ="root";
-	String dbpw = "java1234";
+	String dbpw = "mariadb1234";
 	conn = DriverManager.getConnection(dburl,dbuser,dbpw);
 	System.out.println(conn+"<--입력DB커넥션"); // db와 잘 연결 되었는지 디버깅
 	
@@ -88,7 +88,7 @@ public class GuestbookDao {
 		
 		String dburl = "jdbc:mariadb://localhost:3306/blog";
 		String dbuser ="root";
-		String dbpw = "java1234";
+		String dbpw = "mariadb1234";
 		conn = DriverManager.getConnection(dburl,dbuser,dbpw);
 		
 		//쿼리 작성, 입력, 결과 도출
@@ -127,7 +127,7 @@ public class GuestbookDao {
 	Class.forName("org.mariadb.jdbc.Driver");
 	String dburl = "jdbc:mariadb://localhost:3306/blog";
 	String dbuser ="root";
-	String dbpw = "java1234";
+	String dbpw = "mariadb1234";
 	conn = DriverManager.getConnection(dburl,dbuser,dbpw);
 	System.out.println(conn+"<--수정DB커넥션"); // db와 잘 연결 되었는지 디버깅
 	
@@ -161,7 +161,7 @@ public class GuestbookDao {
 	Class.forName("org.mariadb.jdbc.Driver");
 	String dburl = "jdbc:mariadb://localhost:3306/blog";
 	String dbuser ="root";
-	String dbpw = "java1234";
+	String dbpw = "mariadb1234";
 	conn = DriverManager.getConnection(dburl,dbuser,dbpw);
 	System.out.println(conn+"<--삭제DB커넥션"); // db와 잘 연결 되었는지 디버깅
 	
@@ -194,7 +194,7 @@ public class GuestbookDao {
 		
 		String dburl = "jdbc:mariadb://localhost:3306/blog";
 		String dbuser ="root";
-		String dbpw = "java1234";
+		String dbpw = "mariadb1234";
 		conn = DriverManager.getConnection(dburl,dbuser,dbpw);
 		System.out.println(conn+"<--ListDB커넥션"); // db와 잘 연결 되었는지 디버깅
 		

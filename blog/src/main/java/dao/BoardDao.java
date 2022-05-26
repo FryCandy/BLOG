@@ -24,7 +24,7 @@ public class BoardDao {
 	Class.forName("org.mariadb.jdbc.Driver");
 	String dburl = "jdbc:mariadb://localhost:3306/blog";
 	String dbuser ="root";
-	String dbpw = "java1234";
+	String dbpw = "mariadb1234";
 	conn = DriverManager.getConnection(dburl,dbuser,dbpw);
 	System.out.println(conn+"<--ListDB커넥션"); // db와 잘 연결 되었는지 디버깅
 	//쿼리 작성 및 입력	
@@ -59,7 +59,7 @@ public class BoardDao {
 		
 		String dburl = "jdbc:mariadb://localhost:3306/blog";
 		String dbuser ="root";
-		String dbpw = "java1234";
+		String dbpw = "mariadb1234";
 		conn = DriverManager.getConnection(dburl,dbuser,dbpw);
 		System.out.println(conn+"<--ListDB커넥션"); // db와 잘 연결 되었는지 디버깅
 		//쿼리 작성
@@ -111,7 +111,7 @@ public class BoardDao {
 		
 		String dburl = "jdbc:mariadb://localhost:3306/blog";
 		String dbuser ="root";
-		String dbpw = "java1234";
+		String dbpw = "mariadb1234";
 		conn = DriverManager.getConnection(dburl,dbuser,dbpw);
 		System.out.println(conn+"<--ListDB커넥션"); // db와 잘 연결 되었는지 디버깅
 		//쿼리 작성
@@ -149,7 +149,7 @@ public class BoardDao {
 		
 		String dburl = "jdbc:mariadb://localhost:3306/blog";
 		String dbuser ="root";
-		String dbpw = "java1234";
+		String dbpw = "mariadb1234";
 		conn = DriverManager.getConnection(dburl,dbuser,dbpw);
 		System.out.println(conn+"<--insertDB커넥션"); // db와 잘 연결 되었는지 디버깅
 		//쿼리 입력
@@ -176,7 +176,7 @@ public class BoardDao {
 		
 		String dburl = "jdbc:mariadb://localhost:3306/blog";
 		String dbuser ="root";
-		String dbpw = "java1234";
+		String dbpw = "mariadb1234";
 		conn = DriverManager.getConnection(dburl,dbuser,dbpw);
 		System.out.println(conn+"<--ListDB커넥션"); // db와 잘 연결 되었는지 디버깅
 		//쿼리 입력
@@ -205,7 +205,7 @@ public class BoardDao {
 		
 		String dburl = "jdbc:mariadb://localhost:3306/blog";
 		String dbuser ="root";
-		String dbpw = "java1234";
+		String dbpw = "mariadb1234";
 		conn = DriverManager.getConnection(dburl,dbuser,dbpw);
 		System.out.println(conn+"<--ListDB커넥션"); // db와 잘 연결 되었는지 디버깅
 		//쿼리 입력
@@ -232,7 +232,7 @@ public class BoardDao {
 		
 		String dburl = "jdbc:mariadb://localhost:3306/blog";
 		String dbuser ="root";
-		String dbpw = "java1234";
+		String dbpw = "mariadb1234";
 		conn = DriverManager.getConnection(dburl,dbuser,dbpw);
 		System.out.println(conn+"<--ListDB커넥션"); // db와 잘 연결 되었는지 디버깅
 		//쿼리 입력

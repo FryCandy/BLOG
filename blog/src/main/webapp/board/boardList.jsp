@@ -129,7 +129,7 @@
 					<br>
 					현재 보여지는 게시글 수 : <%=rowPerPage %>개
 					</div>
-					<div class ="col-sm-6 text-left">
+					<div class ="col-sm-6">
 						<p class ="text-right"> 게시글 수 변경 :
 							<select name ="rowPerPage" onchange ="this.form.submit()" >
 								<option value = <%=rowPerPage%>>게시글수를 선택하세요</option>

@@ -19,7 +19,7 @@ public class PhotoDao {
 		Class.forName("org.mariadb.jdbc.Driver");
 		String dburl = "jdbc:mariadb://localhost:3306/blog";
 		String dbuser ="root";
-		String dbpw = "java1234";
+		String dbpw = "mariadb1234";
 		conn = DriverManager.getConnection(dburl,dbuser,dbpw);
 		System.out.println(conn+"<--사진입력DB커넥션"); // db와 잘 연결 되었는지 디버깅
 	
@@ -49,7 +49,7 @@ public class PhotoDao {
 		Class.forName("org.mariadb.jdbc.Driver");
 		String dburl = "jdbc:mariadb://localhost:3306/blog";
 		String dbuser ="root";
-		String dbpw = "java1234";
+		String dbpw = "mariadb1234";
 		conn = DriverManager.getConnection(dburl,dbuser,dbpw);
 		System.out.println(conn+"<--deletePhoto"); // db와 잘 연결 되었는지 디버깅
 		//쿼리 작성 및 입력
@@ -76,7 +76,7 @@ public class PhotoDao {
 		Class.forName("org.mariadb.jdbc.Driver");
 		String dburl = "jdbc:mariadb://localhost:3306/blog";
 		String dbuser ="root";
-		String dbpw = "java1234";
+		String dbpw = "mariadb1234";
 		conn = DriverManager.getConnection(dburl,dbuser,dbpw);
 		System.out.println(conn+"<--photoList"); // db와 잘 연결 되었는지 디버깅
 		//쿼리 작성 및 입력
@@ -107,7 +107,7 @@ public class PhotoDao {
 		Class.forName("org.mariadb.jdbc.Driver");
 		String dburl = "jdbc:mariadb://localhost:3306/blog";
 		String dbuser ="root";
-		String dbpw = "java1234";
+		String dbpw = "mariadb1234";
 		conn = DriverManager.getConnection(dburl,dbuser,dbpw);
 		System.out.println(conn+"<--photoList"); // db와 잘 연결 되었는지 디버깅
 		//쿼리 작성 및 입력
@@ -137,7 +137,7 @@ public class PhotoDao {
 		Class.forName("org.mariadb.jdbc.Driver");
 		String dburl = "jdbc:mariadb://localhost:3306/blog";
 		String dbuser ="root";
-		String dbpw = "java1234";
+		String dbpw = "mariadb1234";
 		conn = DriverManager.getConnection(dburl,dbuser,dbpw);
 		System.out.println(conn+"<--photoOne"); // db와 잘 연결 되었는지 디버깅
 		
